@@ -9,10 +9,17 @@ This code can be run with two differents data:
 - *sample_data.bag* : data from USMMA. **Occulus M750d** imaging sonar is used for these data.
 - *3_meter_orbit.bag* : data from the tank at STEVENS (the fence). **Occulus M1200** imaging sonar is used for these data.
 
+## Differences between the fence and the USMMA data
 
-Each data has its own python file because of two main differences:
-- the data from the tank (the fence) needs to be crop in order to be workable with optical flow. 
-- the Lukas-Kanade parameters are not the same.
+Each data has its own python file because of three main differences:
+
+- **Subscriber**  
+*fence_optflow.py* subscribe to */sonar_oculus_node/M1200d/image*  
+*usmma_optflow.py* subscribe to */sonar_oculus_node/image*
+- **Cropping function**  
+The data from the tank (the fence) needs to be crop in order to be workable with optical flow: function *get_image()* in *fence_optflow.py*
+- **Parameters**  
+The Lukas-Kanade parameters are not the same. See the two differents yaml files.
 
 ## How to run
 
