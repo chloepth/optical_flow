@@ -9,6 +9,11 @@ This code can be run with two differents data:
 - *sample_data.bag* : data from USMMA. **Occulus M750d** imaging sonar is used for these data.
 - *3_meter_orbit.bag* : data from the tank at STEVENS (the fence). **Occulus M1200** imaging sonar is used for these data.
 
+
+Each data has its own python file because of two main differences:
+- the data from the tank (the fence) needs to be crop in order to be workable with optical flow. 
+- the Lukas-Kanade parameters are not the same.
+
 ## How to run
 
 **For the fence data:**
@@ -43,6 +48,7 @@ This code can be run with two differents data:
 **ROS**
 - ROS-noetic
 - catkin_ws
+
 *Note: Use catkin build instead of catkin make for the workspace*
 
 
