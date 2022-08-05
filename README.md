@@ -51,6 +51,20 @@ Each data has its own python file because of two main differences:
 
 *Note: Use catkin build instead of catkin make for the workspace*
 
+## Functions description
+
+- For both python file (*fence_optflow.py* and *usmma_optflow.py*) : 
+
+__init__() : Define all class parameters.  
+**init_node()** : Init the node, fetch all paramaters from ROS. All parameters are explained in the yaml file.   
+**colors_array()** : Create array of random colors for drawing purposes.  
+**callback()** : Callback function is dealing with Optical Flow. Keypoints are defined every 30 frames.
+
+- One more function for *fence_optflow.py*:  
+
+**get_image()** : This function is used to crop the image from the fence.
+
+
 
 
 
