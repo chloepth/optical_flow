@@ -1,0 +1,20 @@
+# PARAMETERS FOR USMMA DATA
+#__________________________
+
+window_leg: 9 # Window size (multiple of 3)
+
+#------------------------------------------
+# Parameters for LUCAS KANADE optical flow
+
+maxLevel: 4 # Number of pyramid levels
+termination: 4 # Termination criteria : stop after 4 iterations
+quality: 0.025 # Criteria count matches the quality level
+flags: 0 # Flags determine what the error is calculating
+minEigThreshold: 1e-3  # Threshold for smallest eignevalue minimum that can count as good data
+
+
+#-----------------------------------------
+# Function and parameters for AKAZE feature detector
+
+des_type: 2 # Descriptor type 2 = invariant to rotation // type 3 = normal/not that
+des_chan: 1

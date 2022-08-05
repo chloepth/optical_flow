@@ -1,0 +1,8 @@
+<launch>
+
+     <node pkg="optflow_package" name="fence" type="fence_node.py" output="screen">
+        <rosparam command="load" file="$(find optflow_package)/config/fence.yaml"/>
+    </node>
+ 
+</launch>
+
