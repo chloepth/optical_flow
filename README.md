@@ -72,6 +72,21 @@ __init__() : Define all class parameters.
 **get_image()** : This function is used to crop the image from the fence.
 
 
+## What still needs to be done
+
+
+- [ ] Tune the error criterion.
+- [ ] Solve the color problem: assign to each keypoint a color, which it must keep until it is
+replaced by another keypoint.
+- [ ] There might be a more robust or efficient way to verify which points are good and
+should be tracked.
+- [ ] A more robust transform estimation. Improvements to the cycling of points (when new
+ones are taken in, if there should be a maximum number of points being tracked, if
+points should be dropped before their 30 frames are up or after their 30 frames are up,
+etc).
+
+
+
 
 
 
