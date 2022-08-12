@@ -33,6 +33,7 @@ class OpticalFlowNode(object):
         Args:
             ns (str, optional): The namespace of the node. Defaults to "~".
         """
+        self.frame_nb = rospy.get_param(ns + "frame_nb")
         self.window_leg = rospy.get_param(ns + "window_leg")
         maxLevel = rospy.get_param(ns + "maxLevel")
         termination = rospy.get_param(ns + "termination")
@@ -43,13 +44,12 @@ class OpticalFlowNode(object):
         self.lk_params = dict(winSize = (self.window_leg, self.window_leg),maxLevel=maxLevel,
                                         criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT,termination, quality),
                                         flags=flags,minEigThreshold=1e-2)
-
         des_type = rospy.get_param(ns + "des_type")
         des_chan = rospy.get_param(ns + "des_chan")
         self.detector = cv2.AKAZE_create(descriptor_type= des_type,descriptor_channels=des_chan)
 
         # Function for Brute Force Feature Matcher
-        self.bf = cv2.BFMatcher(cv2.NORM_L1, crossCheck=True)
+        # self.bf = cv2.BFMatcher(cv2.NORM_L1, crossCheck=True)
 
         self.sonar_sub = rospy.Subscriber('/sonar_oculus_node/M1200d/image', Image, self.callback)
         self.colors_array()
@@ -98,16 +98,15 @@ class OpticalFlowNode(object):
 
 
     def callback(self,data):
-        """Keypoints are defined every 30 frames.
+        """Keypoints are defined every 50 frames.
         For the 'good' keypoints, optical flow method is applied.
         """
-        if (self.i%50==0):
+        if (self.i%self.frame_nb==0):
             self.prev_frame, self.prev_gray = self.get_image(data)
-
             self.key_points, descsi = self.detector.detectAndCompute(self.prev_gray, None) # AKAZE detect keypoints from the first frame
             self.key_points = cv2.KeyPoint_convert(self.key_points) # Convert key points to coordinate tuples
 
-            if self.key_points != ():
+            if self.key_points != (): #comment
                 array_size = int(self.key_points.size)
                 my_size = int(array_size/2)
                 self.key_points.shape = (my_size, 1, 2)
@@ -143,7 +142,7 @@ class OpticalFlowNode(object):
                 #  L1 distance between new patch and original patch : error
                 L1 = err[s]*self.window_leg
 
-                if  L1 < 100:
+                if  L1 < 100: # Arbitrary : you can change this value
                     rand_color = self.color_array[s].tolist()
                     mask_line = cv2.line(self.mask, (int(a), int(b)), (int(c), int(d)),
                                     rand_color, 2)

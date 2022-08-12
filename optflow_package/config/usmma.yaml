@@ -18,3 +18,6 @@ minEigThreshold: 1e-3  # Threshold for smallest eignevalue minimum that can coun
 
 des_type: 2 # Descriptor type 2 = invariant to rotation // type 3 = normal/not that
 des_chan: 1
+
+#-----------------------------------------
+frame_nb: 30
